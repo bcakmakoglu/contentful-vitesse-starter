@@ -1,0 +1,57 @@
+name: ci
+
+on:
+  push:
+#    branches:
+#      - main
+#      - master
+#      - develop
+#  pull_request:
+#    branches:
+#      - main
+#      - master
+#      - develop
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        node: [ 14 ]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.0.2
+          run_install: true
+
+      - name: Build App 🛠
+        run: pnpm build
+
+      # Uncomment to use the upload step
+
+      #- name: Run Upload 💸
+      #  env:
+      #    CONTENTFUL_ORG_ID: ${{ secrets.CONTENTFUL_ORG_ID }}
+      #    CONTENTFUL_APP_DEF_ID: ${{ secrets.CONTENTFUL_APP_DEF_ID }}
+      #    CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+      #  run: pnpm upload-ci
