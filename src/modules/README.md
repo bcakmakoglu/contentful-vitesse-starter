@@ -1,9 +1,11 @@
-# Modules
+## Modules
 
-All modules are installed on app initialization.
-During installation of the module you have access to the `KnownSDK` property.
+A custom user module system. Place a `.ts` file with the following template, it will be installed automatically.
 
-Check the [example](./example-module.ts) for more information.
+```ts
+import { UserModule } from '~/types'
 
-You can safely delete this directory if you don't need it.
-If you do, also make sure to remove the auto-import resolver from `vite.config.ts`.
+export const install: UserModule = ({ app, router, isClient }) => {
+  // do something
+}
+```

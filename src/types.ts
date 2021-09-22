@@ -1,3 +1,3 @@
-import { KnownSDK } from '@contentful/app-sdk'
+import { ViteSSGContext } from 'vite-ssg'
 
-export type UserModule = (ctx: KnownSDK) => void
+export type UserModule = (ctx: ViteSSGContext<false>) => void

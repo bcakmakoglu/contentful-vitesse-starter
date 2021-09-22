@@ -1,14 +1,13 @@
-import React from '@vitejs/plugin-react-refresh'
 import { resolve } from 'path'
-import { pascalCase } from 'scule'
-import AutoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
+import Vue from '@vitejs/plugin-vue'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
 import WindiCSS from 'vite-plugin-windicss'
-import reactJsx from 'vite-react-jsx'
+import Inspect from 'vite-plugin-inspect'
 
-import AutoImportResolver from './resolver/auto-import-resolver'
-
-// https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
@@ -20,53 +19,47 @@ export default defineConfig({
   base: './',
 
   plugins: [
-    React(),
-    reactJsx(),
-    WindiCSS(),
+    Vue({
+      include: [/\.vue$/],
+    }),
+
+    // https://github.com/antfu/unplugin-auto-import
     AutoImport({
-      // output dir + name of the d.ts file
-      dts: './src/auto-imports.d.ts',
-      // targets to transform
-      include: [
-        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-      ],
+      imports: ['vue', '@vueuse/head', '@vueuse/core'],
+      dts: true,
+    }),
+
+    // https://github.com/antfu/unplugin-vue-components
+    Components({
+      // allow auto load markdown components under `./src/components/`
+      extensions: ['vue'],
+
+      dts: true,
+
+      // allow auto import and register components used in markdown
+      include: [/\.vue$/, /\.vue\?vue/],
+
+      // custom resolvers
       resolvers: [
-        // Components auto import resolver
-        AutoImportResolver({
-          path: resolve(__dirname, 'src/components'),
-          resolve: (_, slice) => ({
-            module: `~/components/${pascalCase(slice)}`,
-            name: pascalCase(slice),
-            from: 'default',
-          }),
-        }),
-        // React Use auto import resolver
-        AutoImportResolver({
-          path: resolve(__dirname, 'node_modules/react-use/lib'),
-          resolve: (name) => {
-            return {
-              module: 'react-use',
-              name,
-            }
-          },
-        }),
-        // Forma components auto import resolver
-        AutoImportResolver({
-          path: resolve(__dirname, 'node_modules/@contentful/forma-36-react-components/dist/components'),
-          prefix: 'forma', // i.e. you use the components as <FormaComponent />, feel free to use your preferred prefix
-          resolve: (name, slice) => ({
-            module: '@contentful/forma-36-react-components',
-            name,
-            from: pascalCase(slice),
-          }),
+        // auto import icons
+        // https://github.com/antfu/unplugin-icons
+        IconsResolver({
+          componentPrefix: '',
+          // enabledCollections: ['carbon']
         }),
       ],
-      imports: [
-        'react',
-        {
-          scule: ['pascalCase', 'camelCase', 'kebabCase', 'snakeCase', 'upperFirst', 'lowerFirst', 'splitByCase'],
-        },
-      ],
+    }),
+
+    // https://github.com/antfu/unplugin-icons
+    Icons(),
+
+    // https://github.com/antfu/vite-plugin-windicss
+    WindiCSS(),
+
+    // https://github.com/antfu/vite-plugin-inspect
+    Inspect({
+      // change this to enable inspect for debugging
+      enabled: false,
     }),
   ],
 
@@ -76,7 +69,14 @@ export default defineConfig({
     },
   },
 
+  // https://github.com/antfu/vite-ssg
+  ssgOptions: {
+    script: 'async',
+    formatting: 'minify',
+  },
+
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-use', '@contentful/app-sdk'],
+    include: ['vue', 'vue-router', '@vueuse/core'],
+    exclude: ['vue-demi'],
   },
 })

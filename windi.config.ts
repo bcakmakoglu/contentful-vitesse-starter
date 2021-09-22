@@ -4,7 +4,7 @@ import typographyPlugin from 'windicss/plugin/typography'
 
 // Utility function if you need to define a range of allowed classes
 function range(size: number, startAt = 1) {
-  return Array.from(Array(size).keys()).map((i) => i + startAt)
+  return Array.from(Array(size).keys()).map(i => i + startAt)
 }
 
 export default defineConfig({
@@ -21,10 +21,10 @@ export default defineConfig({
             maxWidth: '65ch',
             color: 'inherit',
             a: {
-              color: 'inherit',
-              opacity: 0.75,
-              fontWeight: '500',
-              textDecoration: 'underline',
+              'color': 'inherit',
+              'opacity': 0.75,
+              'fontWeight': '500',
+              'textDecoration': 'underline',
               '&:hover': {
                 opacity: 1,
                 color: colors.teal[600],
