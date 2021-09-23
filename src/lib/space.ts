@@ -1,5 +1,5 @@
-import { ContentType, SpaceAPI } from './types'
 import { Channel } from './channel'
+import { ContentType, SpaceAPI } from '~/types'
 
 const spaceMethods: Array<keyof SpaceAPI> = [
   'getContentType',
@@ -56,10 +56,10 @@ const spaceMethods: Array<keyof SpaceAPI> = [
   'getTeams',
 ]
 
-export default function createSpace(
+export default (
   channel: Channel,
   initialContentTypes: ContentType[],
-): SpaceAPI {
+): SpaceAPI => {
   const space = {} as SpaceAPI
 
   spaceMethods.forEach((methodName) => {

@@ -1,13 +1,12 @@
 import { getWindow } from 'ssr-window'
 import createInitializer from './initialize'
 import createAPI from './api'
-import { KnownSDK } from './types'
+import { KnownSDK } from '~/types'
 
-export * from './types'
 export { default as locations } from './locations'
 
 type Init = <T extends KnownSDK = KnownSDK>(
-  initCallback: (sdk: T) => any,
+  initCallback: (sdk: T) => void,
   options?: { supressIframeWarning?: boolean }
 ) => void
 

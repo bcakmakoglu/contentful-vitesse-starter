@@ -1,6 +1,6 @@
-import { EditorInterface, EditorLocaleSettings, SharedEditorSDK } from './types'
 import { Channel } from './channel'
 import { MemoizedSignal } from './signal'
+import { EditorInterface, EditorLocaleSettings, SharedEditorSDK } from '~/types'
 
 export default function createEditor(
   channel: Channel,

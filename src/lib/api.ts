@@ -8,8 +8,8 @@ import createEditor from './editor'
 import createNavigator from './navigator'
 import createApp from './app'
 import locations from './locations'
-import { BaseExtensionSDK, EntryFieldInfo, NavigatorAPI, KnownSDK, ConnectMessage } from './types'
 import { Channel } from './channel'
+import { BaseExtensionSDK, ConnectMessage, EntryFieldInfo, KnownSDK, NavigatorAPI } from '~/types'
 
 const DEFAULT_API_PRODUCERS = [
   makeSharedAPI,

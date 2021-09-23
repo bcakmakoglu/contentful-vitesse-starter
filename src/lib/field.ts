@@ -1,10 +1,10 @@
 import { Channel } from './channel'
 import FieldLocale from './field-locale'
-import { EntryFieldAPI, EntryFieldInfo, Items } from './types'
+import { EntryFieldAPI, EntryFieldInfo, Items } from '~/types'
 
 export default class Field implements EntryFieldAPI {
-  private _defaultLocale: string
-  private _fieldLocales: { [key: string]: FieldLocale }
+  private readonly _defaultLocale: string
+  private readonly _fieldLocales: { [key: string]: FieldLocale }
   id: string
   locales: string[]
   type: string

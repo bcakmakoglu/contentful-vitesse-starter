@@ -1,5 +1,5 @@
 import { Signal } from './signal'
-import { ConnectMessage } from './types'
+import { ConnectMessage } from '~/types'
 
 export default function connect(
   currentWindow: Window,
@@ -37,7 +37,7 @@ export class Channel {
   }
 
   // call method with name `method` exposed by contentful web app `window`
-  call(method: string, ...params: any[]) {
+  call<T = any>(method: string, ...params: any[]): Promise<T> {
     const messageId = this._send(method, params)
     return new Promise((resolve, reject) => {
       this._responseHandlers[messageId] = { resolve, reject }

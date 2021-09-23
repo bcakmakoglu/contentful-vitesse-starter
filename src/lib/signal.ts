@@ -2,9 +2,8 @@ class Signal {
   private _id = 0
   private _listeners: { [key: string]: Function } = {}
 
-  dispatch(...args: any[]) {
-    for (const key in this._listeners)
-      this._listeners[key](...args)
+  dispatch(...args: unknown[]) {
+    Object.keys(this._listeners).forEach(key => this._listeners[key](...args))
   }
 
   attach(listener: Function) {

@@ -1,16 +1,10 @@
 import { Channel } from './channel'
-import {
-  DialogsAPI,
-  OpenCustomWidgetOptions,
-  OpenAlertOptions,
-  OpenConfirmOptions,
-  IdsAPI,
-} from './types'
+import { DialogsAPI, IdsAPI, OpenAlertOptions, OpenConfirmOptions, OpenCustomWidgetOptions } from '~/types'
+import { isObject } from '~/lib/utils'
 
-const isObject = (o: any) => typeof o === 'object' && o !== null && !Array.isArray(o)
-const prepareOptions = (options: any) => (isObject(options) ? options : {})
+function prepareOptions<T>(options?: T) { return (isObject(options) ? options : ({} as T)) }
 
-export default function createDialogs(channel: Channel, ids: IdsAPI): DialogsAPI {
+export default (channel: Channel, ids: IdsAPI): DialogsAPI => {
   return {
     openAlert: openSimpleDialog.bind(null, 'alert'),
     openConfirm: openSimpleDialog.bind(null, 'confirm'),
@@ -25,16 +19,16 @@ export default function createDialogs(channel: Channel, ids: IdsAPI): DialogsAPI
   }
 
   function openSimpleDialog(type: string, options?: OpenAlertOptions | OpenConfirmOptions) {
-    return channel.call('openDialog', type, prepareOptions(options)) as Promise<any>
+    return channel.call<boolean>('openDialog', type, prepareOptions<OpenAlertOptions | OpenConfirmOptions>(options))
   }
 
   function openExtensionDialog(optionsInput?: OpenCustomWidgetOptions) {
-    let options = prepareOptions(optionsInput)
+    let options = prepareOptions<OpenCustomWidgetOptions>(optionsInput)
 
     // Use provided ID, default to the current extension.
-    options = { ...options, id: options.id || ids.extension }
+    options = { ...options, id: options?.id || ids.extension }
     if (options.id)
-      return channel.call('openDialog', 'extension', options)
+      return channel.call<boolean>('openDialog', 'extension', options)
     else
       throw new Error('Extension ID not provided.')
   }
@@ -68,6 +62,6 @@ export default function createDialogs(channel: Channel, ids: IdsAPI): DialogsAPI
     options.entityType = entityType
     options.multiple = multiple
 
-    return channel.call('openDialog', 'entitySelector', options) as Promise<any>
+    return channel.call('openDialog', 'entitySelector', options)
   }
 }

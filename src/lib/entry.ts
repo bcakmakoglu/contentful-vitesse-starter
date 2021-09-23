@@ -1,6 +1,6 @@
 import { Channel } from './channel'
 import { MemoizedSignal } from './signal'
-import { EntryAPI, EntryFieldInfo, Metadata, TaskAPI } from './types'
+import { EntryAPI, EntryFieldInfo, Metadata, TaskAPI } from '~/types'
 
 const taskMethods: Array<keyof TaskAPI> = [
   'getTask',
@@ -34,9 +34,8 @@ export default function createEntry(
   const taskApi = {} as TaskAPI
 
   taskMethods.forEach((methodName) => {
-    taskApi[methodName] = function(...args: any[]) {
-      return channel.call('callEntryMethod', methodName, args)
-    } as any
+    taskApi[methodName] = <T>(...args: unknown[]) =>
+      channel.call<T>('callEntryMethod', methodName, args)
   })
 
   return {

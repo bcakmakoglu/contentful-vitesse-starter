@@ -1,19 +1,16 @@
 import { Channel } from './channel'
-import { AppConfigAPI, AppState } from './types'
+import { isFunction, isObject } from '~/lib/utils'
+import { AppConfigAPI, AppState } from '~/types'
 
 const HOOK_STAGE_PRE_INSTALL = 'preInstall'
 const HOOK_STAGE_POST_INSTALL = 'postInstall'
-
-const isObject = (o: any) => typeof o === 'object' && o !== null && !Array.isArray(o)
-const isFunction = (f: any) => typeof f === 'function'
-const isPromise = (p: any) => isObject(p) && isFunction(p.then)
 
 const handleHandlerError = (err: unknown) => {
   console.error(err)
   return Promise.resolve(false)
 }
 
-const runHandler = (handler: Function, defaultResult: any, handlerArg?: any) => {
+const runHandler = (handler: Function, defaultResult: any, handlerArg?: unknown) => {
   // Handler was not registered. Registering a handler is not
   // required. We resolve with the default provided in this case.
   if (!isFunction(handler))
@@ -29,14 +26,8 @@ const runHandler = (handler: Function, defaultResult: any, handlerArg?: any) => 
     return handleHandlerError(err)
   }
 
-  // If handler is synchronous, we wrap the result with a promise
-  // and deal only with Promises API below.
-  let resultPromise = maybeResultPromise
-  if (!isPromise(resultPromise))
-    resultPromise = Promise.resolve(resultPromise)
-
-  return resultPromise
-    .then((result: any) => {
+  return Promise.resolve(maybeResultPromise)
+    .then((result: unknown) => {
       if (result instanceof Error)
         return Promise.reject(result)
       else if (result === false)
@@ -50,12 +41,12 @@ const runHandler = (handler: Function, defaultResult: any, handlerArg?: any) => 
 }
 
 export default function createApp(channel: Channel): AppConfigAPI {
-  const handlers: { [key: string]: any } = {
-    [HOOK_STAGE_PRE_INSTALL]: null,
-    [HOOK_STAGE_POST_INSTALL]: null,
+  const handlers: { [key: string]: () => any } = {
+    [HOOK_STAGE_PRE_INSTALL]: () => {},
+    [HOOK_STAGE_POST_INSTALL]: () => {},
   }
 
-  const setHandler = (stage: string, handler: Function) => {
+  const setHandler = (stage: string, handler: () => any) => {
     if (!isFunction(handler))
       throw new Error('Handler must be a function.')
     else
@@ -102,10 +93,10 @@ export default function createApp(channel: Channel): AppConfigAPI {
     getCurrentState() {
       return channel.call('callAppMethod', 'getCurrentState') as Promise<AppState | null>
     },
-    onConfigure(handler: Function) {
+    onConfigure(handler) {
       setHandler(HOOK_STAGE_PRE_INSTALL, handler)
     },
-    onConfigurationCompleted(handler: Function) {
+    onConfigurationCompleted(handler) {
       setHandler(HOOK_STAGE_POST_INSTALL, handler)
     },
   }

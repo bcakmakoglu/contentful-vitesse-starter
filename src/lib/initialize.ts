@@ -1,10 +1,10 @@
-import { ConnectMessage, KnownSDK } from './types'
 import connect, { Channel } from './channel'
+import { ConnectMessage, KnownSDK } from '~/types'
 
-export default function createInitializer(
+export default (
   currentWindow: Window,
   apiCreator: (channel: Channel, data: ConnectMessage, window: Window) => KnownSDK,
-) {
+) => {
   const connectDeferred = createDeferred()
 
   connectDeferred.promise.then(([channel]: [Channel]) => {
