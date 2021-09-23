@@ -1,19 +1,13 @@
-import { InjectionKey } from 'vue-demi'
-import { Ref } from 'vue'
+import { getWindow } from 'ssr-window'
 import { KnownSDK, UserModule } from '~/types'
-import { init } from '~/lib'
-
-export const SDK: InjectionKey<Ref<KnownSDK>> = Symbol('SDK')
-
-const useSdk = () => {
-  const knownSdk = ref<KnownSDK>()
-  init((sdk) => {
-    knownSdk.value = sdk
-  })
-
-  return knownSdk
-}
+import createInitializer from '~/lib/initialize'
+import createAPI from '~/lib/api'
+import { SDK } from '~/utils'
 
 export const install: UserModule = ({ app }) => {
-  app.provide(SDK, useSdk())
+  const apis = ref<{ api: KnownSDK; customApi: any }>()
+  app.provide(SDK, apis)
+  const init = createInitializer(getWindow(), createAPI)
+  const { onReady } = init({ supressIframeWarning: true })
+  onReady(val => apis.value = val)
 }

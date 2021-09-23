@@ -1,5 +1,5 @@
 import { ViteSSGContext } from 'vite-ssg'
-import { Ref } from 'vue'
+import { EventHook } from '@vueuse/core'
 
 export type UserModule = (ctx: ViteSSGContext<false>) => void
 
@@ -641,7 +641,6 @@ export interface NotifierAPI {
 export interface LocationAPI {
   /** Checks the location in which your extension is running */
   is: (type: string) => boolean
-  current: Ref<Location[keyof Location]>
 }
 
 /* Parameters API */
@@ -857,4 +856,13 @@ export interface ConnectMessage {
   }
   fieldInfo: EntryFieldInfo[]
   field?: FieldInfo
+}
+
+export interface InitOptions {
+  makeCustomApi?: (...args: any[]) => any
+  supressIframeWarning?: boolean
+}
+
+export interface Init<T extends KnownSDK = KnownSDK> {
+  (options?: InitOptions): { onReady: EventHook<{ api: T; customApi: T & Record<any, any> }>['on'] }
 }

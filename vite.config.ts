@@ -28,8 +28,6 @@ export default defineConfig({
         'vue',
         '@vueuse/head',
         '@vueuse/core',
-        { '~/lib': ['locations'] },
-        { '~/modules/sdk': ['SDK'] },
       ],
       dts: true,
     }),
@@ -72,10 +70,13 @@ export default defineConfig({
     },
   },
 
-  // https://github.com/antfu/vite-ssg
   ssgOptions: {
+    mock: true,
     script: 'async',
-    formatting: 'minify',
+  },
+
+  build: {
+    emptyOutDir: true,
   },
 
   optimizeDeps: {

@@ -32,7 +32,7 @@ export class Channel {
     this._send = createSender(sourceId, currentWindow.parent)
 
     currentWindow.addEventListener('message', (event: MessageEvent) => {
-      this._handleMessage(event.data)
+      this.handleMessage(event.data)
     })
   }
 
@@ -55,7 +55,7 @@ export class Channel {
     return this._messageHandlers[method].attach(handler)
   }
 
-  private _handleMessage(message: any) {
+  handleMessage(message: any) {
     if (message.method) {
       const { method, params } = message
       const handlers = this._messageHandlers[method]

@@ -1,10 +1,12 @@
 import connect, { Channel } from './channel'
-import { ConnectMessage, KnownSDK } from '~/types'
+import { ConnectMessage, Init, KnownSDK } from '~/types'
 
-export default (
+const hook = createEventHook<{ api: KnownSDK; customApi: any }>()
+
+export default <T extends KnownSDK = KnownSDK>(
   currentWindow: Window,
   apiCreator: (channel: Channel, data: ConnectMessage, window: Window) => KnownSDK,
-) => {
+): Init<T> => {
   const connectDeferred = createDeferred()
 
   connectDeferred.promise.then(([channel]: [Channel]) => {
@@ -17,15 +19,10 @@ export default (
   // messages before `init` is called.
   connect(currentWindow, (...args) => connectDeferred.resolve(args))
 
-  return function init(
-    initCb: (sdk: KnownSDK, customSdk: any) => any,
-    {
-      makeCustomApi,
-      supressIframeWarning,
-    }: { makeCustomApi?: Function; supressIframeWarning?: boolean } = {
-      supressIframeWarning: false,
-    },
+  return (function init(
+    options,
   ) {
+    const { supressIframeWarning = false, makeCustomApi = () => {} } = options ?? {}
     if (!supressIframeWarning && currentWindow.self === currentWindow.top) {
       console.error(`Cannot use ui-extension-sdk outside of Contenful:
 
@@ -46,15 +43,21 @@ Learn more about local development with the ui-extension-sdk here:
         // APIs are created before so handlers are already
         // registered on the channel.
         messageQueue.forEach((m) => {
-          // TODO Expose private handleMessage method
-          (channel as any)._handleMessage(m)
+          channel.handleMessage(m)
         })
 
         // Hand over control to the developer.
-        initCb(api, customApi)
+        hook.trigger({
+          api,
+          customApi,
+        })
       },
     )
-  }
+
+    return {
+      onReady: hook.on,
+    }
+  }) as Init<T>
 }
 
 function createDeferred<T = any>() {
