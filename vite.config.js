@@ -14,6 +14,7 @@ export default defineConfig({
             '@/': `${resolve(__dirname)}/`,
         },
     },
+    base: './',
     plugins: [
         Vue({
             include: [/\.vue$/],

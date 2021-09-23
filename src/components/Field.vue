@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { FieldExtensionSDK } from '@contentful/app-sdk'
+import { FieldExtensionSDK } from '~/types'
 
 interface FieldProps {
   sdk: FieldExtensionSDK

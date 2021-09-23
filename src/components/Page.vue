@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PageExtensionSDK } from '@contentful/app-sdk'
+import { PageExtensionSDK } from '~/types'
 
 interface PageProps {
   sdk: PageExtensionSDK

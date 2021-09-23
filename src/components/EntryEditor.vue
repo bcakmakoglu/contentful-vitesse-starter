@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { EditorExtensionSDK } from '@contentful/app-sdk'
+import { EditorExtensionSDK } from '~/types'
 
 interface EntryProps {
   sdk: EditorExtensionSDK
