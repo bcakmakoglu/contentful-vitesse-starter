@@ -27,6 +27,7 @@ export default defineConfig({
         '@vueuse/head',
         '@vueuse/core',
         { '~/lib': ['locations'] },
+        { '~/modules/sdk': ['SDK'] },
       ],
       dts: true,
     }),

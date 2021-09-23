@@ -9,8 +9,6 @@ import ConfigScreen from './components/ConfigScreen.vue'
 import Field from './components/Field.vue'
 import Dialog from './components/Dialog.vue'
 import Page from './components/Page.vue'
-import { locations } from '~/lib'
-import { SDK } from '~/modules/sdk'
 
 const view = ref()
 const sdk = inject(SDK)
@@ -43,6 +41,6 @@ const routes = [
 ]
 
 watch(() => sdk?.value?.location?.current, (value: any) => {
-  view.value = routes.find(route => route.location === value).component
+  view.value = routes.find(route => route.location === value)?.component
 })
 </script>
