@@ -17,6 +17,7 @@
     "@contentful/forma-36-fcss": "^0.3.4",
     "@contentful/forma-36-tokens": "^0.11.1",
     "@vueuse/core": "^6.4.1",
+    "@vueuse/head": "^0.6.0",
     "pinia": "^2.0.0-rc.9",
     "prism-theme-vars": "^0.2.2",
     "scule": "^0.2.1",

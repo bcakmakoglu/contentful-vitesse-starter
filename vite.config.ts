@@ -76,7 +76,7 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['vue', 'vue-router', '@vueuse/core'],
+    include: ['vue', '@vueuse/head', '@vueuse/core'],
     exclude: ['vue-demi'],
   },
 })

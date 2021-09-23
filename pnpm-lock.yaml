@@ -14,6 +14,7 @@ specifiers:
   '@vue/compiler-sfc': ^3.2.14
   '@vue/server-renderer': ^3.2.14
   '@vueuse/core': ^6.4.1
+  '@vueuse/head': ^0.6.0
   critters: ^0.0.10
   cross-env: ^7.0.3
   eslint: ^7.32.0
@@ -43,6 +44,7 @@ dependencies:
   '@contentful/forma-36-fcss': 0.3.4
   '@contentful/forma-36-tokens': 0.11.1
   '@vueuse/core': 6.4.1_vue@3.2.14
+  '@vueuse/head': 0.6.0_vue@3.2.14
   pinia: 2.0.0-rc.9_typescript@4.4.3+vue@3.2.14
   prism-theme-vars: 0.2.2
   scule: 0.2.1
@@ -73,7 +75,7 @@ devDependencies:
   vite-plugin-inspect: 0.3.6_vite@2.5.10
   vite-plugin-md: 0.11.1_vite@2.5.10
   vite-plugin-windicss: 1.4.4_typescript@4.4.3+vite@2.5.10
-  vite-ssg: 0.15.3_788752f6ccd2c76d5ff77e2c80d76ffd
+  vite-ssg: 0.15.3_ab203686cf6fb5e9546bc95ce4f18471
   vue-tsc: 0.3.0_typescript@4.4.3
 
 packages:
@@ -838,6 +840,14 @@ packages:
       '@vueuse/shared': 6.4.1_vue@3.2.14
       vue: 3.2.14
       vue-demi: 0.11.4_vue@3.2.14
+    dev: false
+
+  /@vueuse/head/0.6.0_vue@3.2.14:
+    resolution: {integrity: sha512-fi7ZjkMpEAUtTT6iR5wgL2HkX1+3zbrmbpcwU//RgJIWEr5b42jk8E9yOheaC2dYAAHzelAllVpX0pDmhcTXuw==}
+    peerDependencies:
+      vue: '>=3'
+    dependencies:
+      vue: 3.2.14
     dev: false
 
   /@vueuse/shared/6.4.1_vue@3.2.14:
@@ -4735,7 +4745,7 @@ packages:
       - typescript
     dev: true
 
-  /vite-ssg/0.15.3_788752f6ccd2c76d5ff77e2c80d76ffd:
+  /vite-ssg/0.15.3_ab203686cf6fb5e9546bc95ce4f18471:
     resolution: {integrity: sha512-sz2fU5YO/Siu+izc2T+xhA6l2WBo534ZlRHfnzoFgQu3E2qHc9GoynCd0Xf0mJP7Ukc9X0TqVoc1UhNv2E7jeA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -4753,6 +4763,7 @@ packages:
     dependencies:
       '@vue/compiler-sfc': 3.2.14
       '@vue/server-renderer': 3.2.14_vue@3.2.14
+      '@vueuse/head': 0.6.0_vue@3.2.14
       chalk: 4.1.2
       critters: 0.0.10
       fs-extra: 10.0.0
