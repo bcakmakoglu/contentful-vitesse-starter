@@ -16,7 +16,7 @@ const knownSdk = ref<KnownSDK>()
 if (!import.meta.env.SSR) {
   const sdkImport = () => import('@contentful/app-sdk')
   sdkImport().then((sdk: typeof import('@contentful/app-sdk')) => {
-    knownSdk.value = sdk
+    knownSdk.value = sdk as KnownSDK
     sdk.init((sdkCb) => {
       const routes = [
         {
