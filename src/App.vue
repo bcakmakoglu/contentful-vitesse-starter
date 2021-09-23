@@ -42,7 +42,7 @@ const routes = [
   },
 ]
 
-routes.forEach((route) => {
-  if (sdk?.value?.location.is(route.location)) view.value = route.component
+watch(() => sdk?.value?.location?.current, (value: any) => {
+  view.value = routes.find(route => route.location === value).component
 })
 </script>
