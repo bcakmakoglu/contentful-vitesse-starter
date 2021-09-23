@@ -55,6 +55,7 @@ function makeSharedAPI(channel: Channel, data: ConnectMessage): BaseExtensionSDK
   return {
     location: {
       is: tested => currentLocation === tested,
+      current: ref(currentLocation),
     },
     user,
     parameters,

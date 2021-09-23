@@ -1,4 +1,5 @@
 import { ViteSSGContext } from 'vite-ssg'
+import { Ref } from 'vue'
 
 export type UserModule = (ctx: ViteSSGContext<false>) => void
 
@@ -640,6 +641,7 @@ export interface NotifierAPI {
 export interface LocationAPI {
   /** Checks the location in which your extension is running */
   is: (type: string) => boolean
+  current: Ref<Location[keyof Location]>
 }
 
 /* Parameters API */
