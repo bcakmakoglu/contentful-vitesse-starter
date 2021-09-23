@@ -12,23 +12,23 @@
     "lint-fix": "eslint --ignore-path .gitignore \"**/*.{ts,js,tsx,jsx}\" --fix"
   },
   "dependencies": {
-    "@contentful/app-scripts": "^0.12.48",
+    "@contentful/app-scripts": "^0.12.49",
     "@contentful/forma-36-fcss": "^0.3.4",
     "@contentful/forma-36-tokens": "^0.11.1",
     "@vueuse/core": "^6.4.1",
     "@vueuse/head": "^0.6.0",
     "pinia": "^2.0.0-rc.9",
     "ssr-window": "^4.0.0",
-    "vue": "^3.2.14",
+    "vue": "^3.2.16",
     "vue-demi": "^0.11.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.9.0",
     "@iconify/json": "^1.1.405",
     "@types/node": "^16.9.6",
-    "@vitejs/plugin-vue": "^1.9.0",
-    "@vue/compiler-sfc": "^3.2.14",
-    "@vue/server-renderer": "^3.2.14",
+    "@vitejs/plugin-vue": "^1.9.1",
+    "@vue/compiler-sfc": "^3.2.16",
+    "@vue/server-renderer": "^3.2.16",
     "critters": "^0.0.10",
     "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
