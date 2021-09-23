@@ -21,6 +21,7 @@
     "pinia": "^2.0.0-rc.9",
     "prism-theme-vars": "^0.2.2",
     "scule": "^0.2.1",
+    "ssr-window": "^4.0.0",
     "vue": "^3.2.14",
     "vue-demi": "^0.11.4"
   },

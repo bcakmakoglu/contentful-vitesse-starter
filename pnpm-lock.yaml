@@ -25,6 +25,7 @@ specifiers:
   pnpm: ^6.15.1
   prism-theme-vars: ^0.2.2
   scule: ^0.2.1
+  ssr-window: ^4.0.0
   typescript: ^4.4.3
   unplugin-auto-import: ^0.4.6
   unplugin-icons: ^0.11.3
@@ -48,6 +49,7 @@ dependencies:
   pinia: 2.0.0-rc.9_typescript@4.4.3+vue@3.2.14
   prism-theme-vars: 0.2.2
   scule: 0.2.1
+  ssr-window: 4.0.0
   vue: 3.2.14
   vue-demi: 0.11.4_vue@3.2.14
 
@@ -4232,6 +4234,10 @@ packages:
   /sprintf-js/1.0.3:
     resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=}
     dev: true
+
+  /ssr-window/4.0.0:
+    resolution: {integrity: sha512-qCg6wJNeGNTVcPK2KFNfwtHU1gA3UZDZdxogu+Ys5+Ue5PMOENxUb7sscpAWWo4mWOBkJRCwQ50IlyA7qZ0hxw==}
+    dev: false
 
   /statuses/1.5.0:
     resolution: {integrity: sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=}
