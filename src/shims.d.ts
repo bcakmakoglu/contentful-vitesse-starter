@@ -1,7 +1,7 @@
 /* eslint-disable import/no-duplicates */
 
 declare interface Window {
-  // extend the window
+  MutationObserver: typeof MutationObserver
 }
 
 // with vite-plugin-md, markdowns can be treat as Vue components

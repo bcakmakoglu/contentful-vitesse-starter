@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { SidebarExtensionSDK } from '@contentful/app-sdk'
+import { SidebarExtensionSDK } from '~/types'
 
 interface SidebarProps {
   sdk: SidebarExtensionSDK

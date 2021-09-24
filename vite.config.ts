@@ -12,7 +12,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '~/': `${resolve(__dirname, 'src')}/`,
-      '@/': `${resolve(__dirname)}/`,
     },
   },
 
@@ -25,18 +24,20 @@ export default defineConfig({
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
-      imports: ['vue', '@vueuse/head', '@vueuse/core'],
+      imports: [
+        'vue',
+        '@vueuse/head',
+        '@vueuse/core',
+      ],
       dts: true,
     }),
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
-      // allow auto load markdown components under `./src/components/`
       extensions: ['vue'],
 
       dts: true,
 
-      // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/],
 
       // custom resolvers
@@ -69,14 +70,20 @@ export default defineConfig({
     },
   },
 
-  // https://github.com/antfu/vite-ssg
   ssgOptions: {
+    mock: true,
     script: 'async',
-    formatting: 'minify',
+  },
+
+  build: {
+    emptyOutDir: true,
   },
 
   optimizeDeps: {
-    include: ['vue', '@vueuse/head', '@vueuse/core'],
+    include: [
+      'vue',
+      '@vueuse/core',
+    ],
     exclude: ['vue-demi'],
   },
 })

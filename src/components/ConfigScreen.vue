@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { AppExtensionSDK } from '@contentful/app-sdk'
+import { AppExtensionSDK } from '~/types'
 
 interface ConfigProps {
   sdk: AppExtensionSDK

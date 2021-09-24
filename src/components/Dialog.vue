@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { DialogExtensionSDK } from '@contentful/app-sdk'
+import { DialogExtensionSDK } from '~/types'
 
 interface DialogProps {
   sdk: DialogExtensionSDK
