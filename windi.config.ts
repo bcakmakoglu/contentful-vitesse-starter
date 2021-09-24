@@ -10,7 +10,7 @@ import {
   Typography,
   Width,
   ZIndex,
-} from '@/theme'
+} from './theme'
 
 // Utility function if you need to define a range of allowed classes
 function range(size: number, startAt = 1) {
