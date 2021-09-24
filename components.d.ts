@@ -15,6 +15,7 @@ declare module 'vue' {
     EntryEditor: typeof import('./src/components/EntryEditor.vue')['default']
     Field: typeof import('./src/components/Field.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    Loading: typeof import('./src/components/Loading.vue')['default']
     Page: typeof import('./src/components/Page.vue')['default']
     README: typeof import('./src/components/README.md')['default']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']

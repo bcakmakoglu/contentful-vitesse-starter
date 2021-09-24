@@ -4,9 +4,7 @@
       <component :is="view" :sdk="sdk.api" />
     </template>
     <template #fallback>
-      <div class="p-4">
-        Loading...
-      </div>
+      <Loading />
     </template>
   </suspense>
 </template>
