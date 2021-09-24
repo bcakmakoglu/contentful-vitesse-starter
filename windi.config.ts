@@ -1,6 +1,16 @@
 import colors from 'windicss/colors'
 import { defineConfig } from 'windicss/helpers'
 import typographyPlugin from 'windicss/plugin/typography'
+import {
+  BorderRadius,
+  BoxShadow,
+  Spacing,
+  TransitionDuration,
+  TransitionTiming,
+  Typography,
+  Width,
+  ZIndex,
+} from '@/theme'
 
 // Utility function if you need to define a range of allowed classes
 function range(size: number, startAt = 1) {
@@ -14,7 +24,29 @@ export default defineConfig({
 
   plugins: [typographyPlugin()],
   theme: {
+    ...Typography,
+    boxShadow: {
+      ...BoxShadow,
+    },
     extend: {
+      borderRadius: {
+        ...BorderRadius,
+      },
+      spacing: {
+        ...Spacing,
+      },
+      width: {
+        ...Width,
+      },
+      zIndex: {
+        ...ZIndex,
+      },
+      transitionDuration: {
+        ...TransitionDuration,
+      },
+      transitionTimingFunction: {
+        ...TransitionTiming,
+      },
       typography: {
         DEFAULT: {
           css: {
