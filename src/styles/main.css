@@ -3,10 +3,13 @@
 html,
 body,
 div {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
+    @apply m-0 p-0 border-0 text-base font-mono;
     vertical-align: baseline;
+}
+
+.fade-enter-active, .fade-leave-active {
+    @apply transition-opacity duration-1000;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
 }

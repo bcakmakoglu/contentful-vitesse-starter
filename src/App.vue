@@ -1,12 +1,19 @@
 <template>
-  <suspense>
-    <template #default>
-      <component :is="view" :sdk="sdk.api" />
+  <main>
+    <template v-if="sdk && sdk.api">
+      <transition name="fade" mode="out-in">
+        <keep-alive>
+          <suspense>
+            <component :is="view" :sdk="sdk.api" />
+            <template #fallback>
+              <Loading />
+            </template>
+          </suspense>
+        </keep-alive>
+      </transition>
     </template>
-    <template #fallback>
-      <Loading />
-    </template>
-  </suspense>
+    <Loading v-else />
+  </main>
 </template>
 
 <script setup lang="ts">

@@ -1,8 +1,3 @@
-import { ViteSSGContext } from 'vite-ssg'
-import { EventHook } from '@vueuse/core'
-
-export type UserModule = (ctx: ViteSSGContext<false>) => void
-
 export type EntityType = 'Entry' | 'Asset'
 export type TagVisibility = 'private' | 'public'
 
@@ -139,13 +134,13 @@ export interface FieldAPI {
   setInvalid: (value: boolean) => void
 
   /** Calls the callback every time the value of the field is changed by an external event or when setValue() is called.
-     *  the returned function can be called to remove the handler function */
+   *  the returned function can be called to remove the handler function */
   onValueChanged: (callback: (value: any) => void) => () => void
   /** Calls the callback when the disabled status of the field changes.
-     *  the returned function can be called to remove the handler function */
+   *  the returned function can be called to remove the handler function */
   onIsDisabledChanged: (callback: (isDisabled: boolean) => void) => () => void
   /** Calls the callback immediately with the current validation errors and whenever the field is re-validated.
-     *  the returned function can be called to remove the handler function */
+   *  the returned function can be called to remove the handler function */
   onSchemaErrorsChanged: (callback: (errors: Error[]) => void) => () => void
 }
 
@@ -172,13 +167,13 @@ export interface EntryFieldAPI {
   /** Removes the value for the field and locale. */
   removeValue: (locale?: string) => Promise<void>
   /** Calls the callback every time the value of the field is changed by an external event or when setValue() is called.
-     *  the returned function can be called to remove the handler function */
+   *  the returned function can be called to remove the handler function */
   onValueChanged: {
     (callback: (value: any) => void): () => void
     (locale: string, callback: (value: any) => void): () => void
   }
   /** Calls the callback when the disabled status of the field changes.
-     *  the returned function can be called to remove the handler function */
+   *  the returned function can be called to remove the handler function */
   onIsDisabledChanged: {
     (callback: (isDisabled: boolean) => void): () => void
     (locale: string, callback: (isDisabled: boolean) => void): () => void
@@ -186,7 +181,7 @@ export interface EntryFieldAPI {
   }
 
   /** Get an instance of FieldAPI for this field, specific to the locale that is
-     * passed as an argument */
+   * passed as an argument */
   getForLocale: (locale: string) => FieldAPI
 }
 
@@ -240,9 +235,9 @@ export interface EntryAPI extends TaskAPI {
   /** Allows to control the values of all other fields in the current entry. */
   fields: { [key: string]: EntryFieldAPI }
   /**
-     * Optional metadata on an entry
-     * @deprecated
-     */
+   * Optional metadata on an entry
+   * @deprecated
+   */
   metadata?: Metadata
   getMetadata: () => Metadata | undefined
   onMetadataChanged: (callback: (metadata?: Metadata) => void) => VoidFunction
@@ -513,9 +508,9 @@ export interface DialogsAPI {
     }
   ) => Promise<string | boolean>
   /** Opens an extension in a dialog. */
-  openExtension: (options?: OpenCustomWidgetOptions) => Promise<unknown>
+  openExtension: (options?: OpenCustomWidgetOptions) => Promise<any>
   /** Opens the current app in a dialog */
-  openCurrentApp: (options?: Omit<OpenCustomWidgetOptions, 'id'>) => Promise<unknown>
+  openCurrentApp: (options?: Omit<OpenCustomWidgetOptions, 'id'>) => Promise<any>
   /** Opens the current extension or app in a dialog */
   openCurrent: (
     options?: Omit<OpenCustomWidgetOptions, 'id'> | OpenCustomWidgetOptions
@@ -791,9 +786,9 @@ export interface AppConfigAPI {
   /** Returns parameters of an App, null otherwise */
   getParameters: <T = Object>() => Promise<null | T>
   /** Registers a handler to be called to produce parameters for an App */
-  onConfigure: (handler: () => any) => void
+  onConfigure: (handler: Function) => void
   /** Registers a handler to be called once configuration was finished */
-  onConfigurationCompleted: (handler: () => any) => void
+  onConfigurationCompleted: (handler: Function) => void
 }
 
 export type AppExtensionSDK = Omit<BaseExtensionSDK, 'ids'> & {
@@ -803,12 +798,12 @@ export type AppExtensionSDK = Omit<BaseExtensionSDK, 'ids'> & {
 }
 
 export type KnownSDK =
-    | FieldExtensionSDK
-    | SidebarExtensionSDK
-    | DialogExtensionSDK
-    | EditorExtensionSDK
-    | PageExtensionSDK
-    | AppExtensionSDK
+  | FieldExtensionSDK
+  | SidebarExtensionSDK
+  | DialogExtensionSDK
+  | EditorExtensionSDK
+  | PageExtensionSDK
+  | AppExtensionSDK
 
 export interface Locations {
   LOCATION_ENTRY_FIELD: 'entry-field'
@@ -856,15 +851,4 @@ export interface ConnectMessage {
   }
   fieldInfo: EntryFieldInfo[]
   field?: FieldInfo
-}
-
-export interface InitOptions {
-  makeCustomApi?: (...args: any[]) => any
-  supressIframeWarning?: boolean
-}
-
-export type Apis<T extends KnownSDK = KnownSDK> = { api: T; customApi: T & Record<any, any> }
-
-export interface Init<T extends KnownSDK = KnownSDK> {
-  (options?: InitOptions): { onReady: EventHook<Apis<T>>['on'] }
 }

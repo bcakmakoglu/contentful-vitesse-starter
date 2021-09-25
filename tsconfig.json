@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "module": "ESNext",
-    "target": "es2016",
+    "target": "es2017",
     "lib": [
       "DOM",
       "ESNext"
@@ -23,9 +23,6 @@
     "paths": {
       "~/*": [
         "src/*"
-      ],
-      "@/*": [
-        "*"
       ]
     }
   },
