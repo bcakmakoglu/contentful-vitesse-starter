@@ -863,6 +863,8 @@ export interface InitOptions {
   supressIframeWarning?: boolean
 }
 
+export type Apis<T extends KnownSDK = KnownSDK> = { api: T; customApi: T & Record<any, any> }
+
 export interface Init<T extends KnownSDK = KnownSDK> {
-  (options?: InitOptions): { onReady: EventHook<{ api: T; customApi: T & Record<any, any> }>['on'] }
+  (options?: InitOptions): { onReady: EventHook<Apis<T>>['on'] }
 }
