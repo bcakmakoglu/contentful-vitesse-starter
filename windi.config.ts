@@ -4,6 +4,7 @@ import typographyPlugin from 'windicss/plugin/typography'
 import {
   BorderRadius,
   BoxShadow,
+  Colors,
   Spacing,
   TransitionDuration,
   TransitionTiming,
@@ -24,11 +25,17 @@ export default defineConfig({
 
   plugins: [typographyPlugin()],
   theme: {
+    colors: {
+      ...Colors,
+    },
     ...Typography,
     boxShadow: {
       ...BoxShadow,
     },
     extend: {
+      colors: {
+        ...Colors,
+      },
       borderRadius: {
         ...BorderRadius,
       },
