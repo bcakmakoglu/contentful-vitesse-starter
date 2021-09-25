@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <main>
     <component :is="view" v-if="view && sdk" :sdk="sdk.api" />
     <Loading v-else />
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">
