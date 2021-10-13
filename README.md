@@ -2,19 +2,32 @@
 
 Build a Contentful App using Vue3 + Vite2. 🍟
 
-![top-language](https://img.shields.io/github/languages/top/bcakmakoglu/contentful-app-vue-starter)
-[![dependencies Status](https://status.david-dm.org/gh/bcakmakoglu/contentful-app-vue-starter.svg)](https://david-dm.org/bcakmakoglu/contentful-app-vue-starter)
-[![devDependencies Status](https://status.david-dm.org/gh/bcakmakoglu/contentful-app-vue-starter.svg?type=dev)](https://david-dm.org/bcakmakoglu/contentful-app-vue-starter?type=dev)
-![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/bcakmakoglu/contentful-app-vue-starter)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bcakmakoglu/contentful-app-vue-starter)
-![GitHub last commit](https://img.shields.io/github/last-commit/bcakmakoglu/contentful-app-vue-starter)
+![top-language](https://img.shields.io/github/languages/top/bcakmakoglu/contentful-vitesse-starter)
+[![dependencies Status](https://status.david-dm.org/gh/bcakmakoglu/contentful-vitesse-starter.svg)](https://david-dm.org/bcakmakoglu/contentful-vitesse-starter)
+[![devDependencies Status](https://status.david-dm.org/gh/bcakmakoglu/contentful-vitesse-starter.svg?type=dev)](https://david-dm.org/bcakmakoglu/contentful-vitesse-starter?type=dev)
+![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/bcakmakoglu/contentful-vitesse-starter)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bcakmakoglu/contentful-vitesse-starter)
+![GitHub last commit](https://img.shields.io/github/last-commit/bcakmakoglu/contentful-vitesse-starter)
 
+## Table of Contents
 
-## Features
+* [🥦 Features](#-features)
+
+* [📦 Pre-packed](#-pre-packed)
+
+* [☑️ Checklist](#-checklist)
+
+* [🛠 Setup](#-setup)
+
+* [🧪 Development](#-development)
+
+* [🎮 Getting Started](#-getting-started)
+
+## 🥦 Features
 
 - ⚡️ [Vue 3](https://github.com/vuejs/vue-next), [Vite 2](https://github.com/vitejs/vite), [pnpm](https://pnpm.js.org/), [ESBuild](https://github.com/evanw/esbuild) - born with fastness
 
-- 📦 [Components auto importing](./src/components)
+- 🧲 [Components auto importing](./src/components)
 
 - 🍍 [State Management via Pinia](https://pinia.esm.dev/)
 
@@ -32,7 +45,7 @@ Build a Contentful App using Vue3 + Vite2. 🍟
 
 - 🦾 TypeScript, of course
 
-## Pre-packed
+## 📦 Pre-packed
 
 ### UI Frameworks
 
@@ -70,15 +83,7 @@ Build a Contentful App using Vue3 + Vite2. 🍟
   - [Windi CSS Intellisense](https://marketplace.visualstudio.com/items?itemName=voorjaar.windicss-intellisense) - IDE support for Windi CSS
   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-If you prefer to do it manually with the cleaner git history
-
-```bash
-npx degit antfu/vitesse my-vitesse-app
-cd my-vitesse-app
-pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
-```
-
-## Checklist
+## ☑️ Checklist
 
 When you use this template, try follow the checklist to update your info properly
 
@@ -91,9 +96,9 @@ When you use this template, try follow the checklist to update your info properl
 
 ```bash
 # create a new project
-$ npx degit bcakmakoglu/contentful-app-vue-starter my-app
+$ npx degit bcakmakoglu/contentful-vitesse-starter my-app
 # or just clone the repo
-$ git clone bcakmakoglu/contentful-app-vue-starter my-app
+$ git clone https://github.com/bcakmakoglu/contentful-vitesse-starter.git my-app
 
 # you're free to use the package manager of your choosing
 $ pnpm install
@@ -117,3 +122,14 @@ $ pnpm serve
 # upload dist dir to contentful
 $ pnpm upload
 ```
+
+## 🎮 Getting Started
+
+[In the components directory](./src/components), 
+you can find an example component for each location a Contentful App can have.
+They serve as a starting point to build your app.
+
+Each of these components will be "routed" to depending on the current
+location of the app, i.e. you do not have to implement any more logic for
+an app to be served at its proper location.
+To see how it works check the [App component](./src/App.vue).
